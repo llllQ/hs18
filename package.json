@@ -1,0 +1,29 @@
+{
+  "name": "hs18",
+  "version": "1.0.0",
+  "description": "node js server for twilio web chat integration",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/llllQ/hs18.git"
+  },
+  "keywords": [
+    "twilio",
+    "chatbot",
+    "bevs",
+    "drinks"
+  ],
+  "author": "\"Matt Penlington\", \"Minesh Patel\", 'Logan Alleyne', 'Luke Doughty'",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/llllQ/hs18/issues"
+  },
+  "homepage": "https://github.com/llllQ/hs18#readme",
+  "dependencies": {
+    "express": "^4.16.4",
+    "twilio": "^3.23.2"
+  }
+}
