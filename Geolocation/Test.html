@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<body>
+<button onclick="fillMeIn()">Here</button>
+<button onclick="getLocation()">Get Location</button>
+<button onclick="naePals()">Find Pals</button>
+<p id ="test"></p>
+<p>now get me Spider-man</p>
+<p id ="mapBoi"></p>
+<script>
+var a = document.getElementById("test");
+var lat;
+var lon;
+var crlat = 0;
+var crlon = 0;
+var latList = [55.8642,50.8225,51.5074];
+var lonList = [4.2518, 0.1372, 0.1278];
+var chatrooms = [latList, lonList];
+
+function fillMeIn() {
+	lat = prompt("Can I have your latitude please.", "55.8642");
+	lon = prompt("Can I please have your Longitude", "4.2518");
+}
+
+function getLocation() {
+    if (navigator.geolocation) {
+	navigator.geolocation.watchPosition(showPosition);
+    } else {
+	a.innerHTML = "Geolocation is not available";}
+    }	
+
+function showPosition(position) {
+	lat = position.coords.latitude;
+	lon = position.coords.longitude;
+	
+    a.innerHTML = "Latitude: " + lat + 
+    "<br>Longitude: " + lon +
+	"<br>Time: " + position.timestamp;
+	
+	//var longlat = position.coords.latitude + "," + position.coords.logitude;
+	
+	//var shit = "https://www.google.com/maps/@" + longlat;
+	
+	//document.getElementById("mapBoi").innerHTML = "<img src='" + shit + "'>"
+}
+
+function naePals() {
+	var i = 0;
+	var found = false;
+	var text = "";
+	
+	while (found == false) {
+	if (lat >= (latList[i] - 1) && lat <= (latList[i] + 1))
+	{
+		if(lon >= (lonList[i] - 1) && lon <= (lonList[i] + 1))
+		{
+			text = text + "<br>Nice one pal. Latitude: " + latList[i] + " Longitude: " + lonList[i] + ".";
+			document.getElementById("mapBoi").innerHTML = text;
+			found = true;
+		}
+		else
+		{
+		text = text + "<br>Fucked it pal, lon. Latitude: " + latList[i] + " Longitude: " + lonList[i] + ".";
+		document.getElementById("mapBoi").innerHTML = text;
+		i ++;
+		}
+	}
+	else
+	{
+		text = text + "<br>Fucked it pal, lat. Latitude: " + latList[i] + " Longitude: " + lonList[i] + ".";
+		document.getElementById("mapBoi").innerHTML = text;
+		i ++;
+	}
+	}
+}
+</script>
+</body>
+</html>
