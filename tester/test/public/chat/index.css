@@ -1,3 +1,4 @@
+@import "https://fonts.googleapis.com/css?family=Itim|Nixie+One";
 * {
   box-sizing:border-box;
 }
@@ -8,8 +9,8 @@ html, body {
   height:100%;
   width:100%;
   color:#dedede;
-  background-color: #849091;
-  font-family: 'Helvetica Neue', Helvetica, sans-serif;
+  background-color: #F5F5F5;
+  font-family: 'Nixie One', cursive;
 }
 
 header {
@@ -20,9 +21,10 @@ header {
 }
 
 header a, header a:visited {
-  font-size:18px;
-  color:#dedede;
+  font-size:50px;
+  color:rgb(0, 238, 255);
   text-decoration:none;
+  text-shadow: 1px 1px rgb(255, 0, 221);
 }
 
 header a:hover {
@@ -31,7 +33,7 @@ header a:hover {
 
 section {
   height:70%;
-  background-color:#2B2B2A;
+  background-image: radial-gradient(circle,  #21c2f5, #9c63c7 );
 }
 
 section input {
@@ -40,21 +42,23 @@ section input {
   width:800px;
   margin:10px auto;
   outline:none;
-  background-color:transparent;
+  background-color:#F5F5F5;
   border:none;
-  border-bottom:1px solid #2B2B2A;
+  border-bottom:1px solid rgb(0, 0, 0);
   padding:0;
   font-size:42px;
-  color:#eee;
+  font-family: 'Itim', cursive;
+  color:##A9A9A9;
 }
 
 #messages {
-  background-color:#232323;
+  background-color: white );
   padding:10px;
   height:100%;
   width:800px;
   margin:0 auto;
   overflow-y:auto;
+  font-family: 'Itim', cursive;
 }
 
 #messages p {
@@ -69,7 +73,7 @@ section input {
 
 .message-container {
   margin:5px 0;
-  color:#fff;
+  color:rgb(0, 0, 0);
 }
 
 .message-container .username {
@@ -77,11 +81,13 @@ section input {
   margin-right:5px;
   font-weight:bold;
   color:#849091;
+  font-family: 'Itim', cursive;
 }
 
 .me, .username.me {
   font-weight:bold;
   color:cyan;
+  font-family: 'Itim', cursive;
 }
 
 .message-container .username.me {
