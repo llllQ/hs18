@@ -1,25 +1,18 @@
 const ADJECTIVES = [
-    'Abrasive', 'Brash', 'Callous', 'Daft', 'Eccentric', 'Fiesty', 'Golden',
-    'Holy', 'Ignominious', 'Joltin', 'Killer', 'Luscious', 'Mushy', 'Nasty',
-    'OldSchool', 'Pompous', 'Quiet', 'Rowdy', 'Sneaky', 'Tawdry',
-    'Unique', 'Vivacious', 'Wicked', 'Xenophobic', 'Yawning', 'Zesty',
+    'Golden', 'Killer', 'Zesty', 'Smokin', 'Humble', 'Disappointing', 'Exceptional',
+    'Rude', 'Nasty', 'Big'
 ];
 
 const FIRST_NAMES = [
-    'Anna', 'Bobby', 'Cameron', 'Danny', 'Emmett', 'Frida', 'Gracie', 'Hannah',
-    'Isaac', 'Jenova', 'Kendra', 'Lando', 'Mufasa', 'Nate', 'Owen', 'Penny',
-    'Quincy', 'Roddy', 'Samantha', 'Tammy', 'Ulysses', 'Victoria', 'Wendy',
-    'Xander', 'Yolanda', 'Zelda',
+    'Espresso', 'Grapefruit', 'Grape', 'Tomato', 'Strawberry', 'Mulled', 'Raspberry',
+    'Clemintine', 'Blueberry', 'Oreo', 'Caramel', 'Chocolate', 'Peach',
 ];
 
 const LAST_NAMES = [
-    'Anchorage', 'Berlin', 'Cucamonga', 'Davenport', 'Essex', 'Fresno',
-    'Gunsight', 'Hanover', 'Indianapolis', 'Jamestown', 'Kane', 'Liberty',
-    'Minneapolis', 'Nevis', 'Oakland', 'Portland', 'Quantico', 'Raleigh',
-    'SaintPaul', 'Tulsa', 'Utica', 'Vail', 'Warsaw', 'XiaoJin', 'Yale',
-    'Zimmerman',
+    '-Cosmopolitan', '-Mojito', '-Negroni' , '-Old-Fashioned', '-Martini', 
+    '-Margarita', '-Daiquiri', '-Beer', '-Stout', '-Wine' , '-WKD', '-and-Coke',
 ];
 
 const rand = (arr) => arr[Math.floor(Math.random() * arr.length)];
 
-module.exports = () => rand(ADJECTIVES) + rand(FIRST_NAMES) + rand(LAST_NAMES);
+module.exports = () => rand(ADJECTIVES) +'-'+ rand(FIRST_NAMES) + rand(LAST_NAMES);

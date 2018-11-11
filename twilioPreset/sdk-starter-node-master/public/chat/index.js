@@ -9,6 +9,21 @@ $(function() {
   // will have in this sample app
   var generalChannel;
 
+  //array of channel objects
+  // var arrChannel = [{channelName: 'channel0', lat: '', long:''}];
+  // var arrChannel = ['a','b','c'];
+  var sussChannel;
+
+  var vpnChannel;
+
+  var myArray = [50.86, 5];
+
+  var userLat = myArray[Math.floor(Math.random()* myArray.length)];
+  var userLong = 0;
+
+
+  console.log(process.env);
+
   // The server will assign the client a random username - store that value
   // here
   var username;
@@ -38,7 +53,7 @@ $(function() {
   }
 
   // Alert the user they have been assigned a random username
-  print('Logging in...');
+  print('Connecting...');
 
   // Get an access token for the current user, passing a username (identity)
   // and a device ID - for browser-based apps, we'll always just use the
@@ -59,39 +74,109 @@ $(function() {
   });
 
   function createOrJoinGeneralChannel() {
-    // Get the general chat channel, which is where all the messages are
-    // sent in this simple application
-    print('Attempting to join "general" chat channel...');
-    chatClient.getChannelByUniqueName('general')
-    .then(function(channel) {
-      generalChannel = channel;
-      console.log('Found general channel:');
-      console.log(generalChannel);
-      setupChannel();
-    }).catch(function() {
-      // If it doesn't exist, let's create it
-      console.log('Creating general channel');
+    //new version coded by the boys
+    print('Attempting to find hotboys in your area...')
+    if (userLat == 50.86){
+      chatClient.getChannelByUniqueName('sussex')
+      .then(function(channel){
+        sussChannel = channel;
+        console.log('Found Sussex Channel');
+        console.log(sussChannel);
+        setupSussChannel();
+      }).catch(function(){
+        // Creating chatroom as no current one open
+      console.log('Creating channel for location latitude: '+userLat+', longitude: '+userLong);
       chatClient.createChannel({
-        uniqueName: 'general',
-        friendlyName: 'General Chat Channel'
+        uniqueName: 'sussex',
+        friendlyName: 'Falmer Drink Buddy Chat Channel'
       }).then(function(channel) {
-        console.log('Created general channel:');
+        console.log('Created Falmer channel:');
         console.log(channel);
-        generalChannel = channel;
+        sussChannel = channel;
+        setupSussChannel();
+        print('Created a Chat Group for your Area')
+      }).catch(function(channel) {
+        console.log('Channel could not be created:');
+        console.log(channel);
+      });
+      });
+    }else{
+      chatClient.getChannelByUniqueName('vpn')
+      .then(function(channel){
+        sussChannel = channel;
+        console.log('Found London Channel');
+        console.log(vpnChannel);
+        setupVpnChannel();
+      }).catch(function(){
+        // Creating chatroom as no current one open
+      console.log('Creating channel for location latitude: '+userLat+', longitude: '+userLong);
+      chatClient.createChannel({
+        uniqueName: 'vpn',
+        friendlyName: 'London Drink Buddy Chat Channel'
+      }).then(function(channel) {
+        console.log('Created London channel:');
+        console.log(channel);
+        sussChannel = channel;
         setupChannel();
       }).catch(function(channel) {
         console.log('Channel could not be created:');
         console.log(channel);
       });
-    });
+      });
+    }
+    
+
+    //new version coded by the boys
+
+
+    // Get the general chat channel, which is where all the messages are
+    // sent in this simple application
+  //   print('Attempting to join "general" chat channel...');
+  //   chatClient.getChannelByUniqueName('general')
+  //   .then(function(channel) {
+  //     generalChannel = channel;
+  //     console.log('Found general channel:');
+  //     console.log(generalChannel);
+  //     setupChannel();
+  //   }).catch(function() {
+  //     // If it doesn't exist, let's create it
+  //     console.log('Creating general channel');
+  //     chatClient.createChannel({
+  //       uniqueName: 'general',
+  //       friendlyName: 'General Chat Channel'
+  //     }).then(function(channel) {
+  //       console.log('Created general channel:');
+  //       console.log(channel);
+  //       generalChannel = channel;
+  //       setupChannel();
+  //     }).catch(function(channel) {
+  //       console.log('Channel could not be created:');
+  //       console.log(channel);
+  //     });
+  //   });
   }
 
   // Set up channel after it has been found
-  function setupChannel() {
+  function setupSussChannel() {
     // Join the general channel
-    generalChannel.join().then(function(channel) {
-      print('Joined channel as '
-      + '<span class="me">' + username + '</span>.', true);
+    sussChannel.join().then(function(channel) {
+      // print('Joined channel as '
+      // + '<span class="me">' + username + '</span>.', true);
+      print('Joined Local Sussex ChatRoom');
+    });
+
+    // Listen for new messages sent to the channel
+    generalChannel.on('messageAdded', function(message) {
+      printMessage(message.author, message.body);
+    });
+  }
+
+  function setupVpnChannel() {
+    // Join the general channel
+    sussChannel.join().then(function(channel) {
+      // print('Joined channel as '
+      // + '<span class="me">' + username + '</span>.', true);
+      print('Joined Local Chatroom');
     });
 
     // Listen for new messages sent to the channel
