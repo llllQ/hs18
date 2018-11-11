@@ -1,0 +1,238 @@
+@mixin t($time){
+  transition:$time ease-out;
+}
+@import 'https://fonts.googleapis.com/css?family=Nixie+One';
+
+:root{
+  --spread: .5em;
+  --shift: .01em;
+  --base: #4d70c7;
+  --c1: #21c2f5; 
+  --c2: #9c63c7;
+}
+@keyframes flicker1 {
+  95% {
+    text-shadow: 
+      0 0 .05em var(--c1), 
+      0 0 .1em var(--base), 
+
+      calc(var(--shift) * 1) calc(var(--shift) * 1) calc(var(--spread) / 50) var(--c1), 
+      calc(var(--shift) * -1) calc(var(--shift) * -1) calc(var(--spread) / 50) var(--c1), 
+      calc(var(--shift) * 1) calc(var(--shift) * -1) calc(var(--spread) / 50) var(--c1), 
+      calc(var(--shift) * -1) calc(var(--shift) * 1) calc(var(--spread) / 50) var(--c1),
+
+      0 0 var(--spread) var(--base),
+      0 0 calc(var(--spread) / 1.5) var(--base);
+  }
+  98% {
+    text-shadow: 
+      0 0 .05em var(--c1), 
+      0 0 .1em var(--c2), 
+
+      calc(var(--shift) * 1) calc(var(--shift) * 1) calc(var(--spread) / 50) var(--c1), 
+      calc(var(--shift) * -1) calc(var(--shift) * -1) calc(var(--spread) / 50) var(--c1), 
+      calc(var(--shift) * 1) calc(var(--shift) * -1) calc(var(--spread) / 50) var(--c1), 
+      calc(var(--shift) * -1) calc(var(--shift) * 1) calc(var(--spread) / 50) var(--c1),
+
+      0 0 0 var(--base),
+      0 0 0 var(--base);
+  }
+}
+    
+@keyframes flicker2 {
+  90% {
+    opacity: .1;
+    text-shadow: 
+      0 0 .05em var(--c1), 
+      0 0 .1em var(--c2), 
+
+      calc(var(--shift) * 1) calc(var(--shift) * 1) calc(var(--spread) / 50) var(--c1), 
+      calc(var(--shift) * -1) calc(var(--shift) * -1) calc(var(--spread) / 50) var(--c1), 
+      calc(var(--shift) * 1) calc(var(--shift) * -1) calc(var(--spread) / 50) var(--c1), 
+      calc(var(--shift) * -1) calc(var(--shift) * 1) calc(var(--spread) / 50) var(--c1),
+
+      0 0 0 var(--base),
+      0 0 0 var(--base);
+  }
+}
+
+$bg: #0130b4;
+$w: #fff;
+$f: 'Anonymous Pro', monospace;
+$p: #ff5cf8;
+$t: rgba(255,255,255,0);
+
+h3 {
+  font-family: 'Nixie One', cursive;
+  font-weight: 100;
+  margin: 0 0 .2em 0;
+  font-size: 5em;
+  letter-spacing: -.01em;
+  transform: rotate(0deg);
+  color: transparent;
+  text-shadow: 
+    0 0 .05em var(--c1), 
+    0 0 .1em var(--base), 
+
+    calc(var(--shift) * 1) calc(var(--shift) * 1) calc(var(--spread) / 50) var(--c1), 
+    calc(var(--shift) * -1) calc(var(--shift) * -1) calc(var(--spread) / 50) var(--c1), 
+    calc(var(--shift) * 1) calc(var(--shift) * -1) calc(var(--spread) / 50) var(--c1), 
+    calc(var(--shift) * -1) calc(var(--shift) * 1) calc(var(--spread) / 50) var(--c1),
+    
+    0 0 var(--spread) var(--base),
+    0 0 calc(var(--spread) / 1.5) var(--base);
+  span {
+    &:nth-child(1) {
+      animation: flicker1 1s infinite alternate ease-in-out;
+    }
+    &:nth-child(2) {
+      animation: flicker1 1.5s infinite alternate ease-in-out;
+    }
+    &:nth-child(3) {
+      animation: flicker1 .47s infinite alternate ease-in-out;
+    }
+    &:nth-child(4) {
+      animation: flicker2 .1s infinite alternate ease-in-out;
+    }
+  }
+}
+
+p {
+  margin: 0;
+  transform: translateX(10%);
+}
+body{
+  width:100vw;
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:radial-gradient(circle at center, $bg 10%, $t), repeating-linear-gradient(45deg, lighten($p, 10%), lighten($p, 10%) 1px, $p 2px, $p 10px);
+  font-family:$f;
+  font-weight:100;
+  .wrapper{
+    width:660px;
+    height:100px;
+    position:relative;
+    overflow:hidden;
+    margin-left:20px;
+    .inner{
+      position:absolute;
+      width:270px;
+      height:100%;
+      background:$bg;
+      z-index:-11;
+      left:0;
+      top:0;
+      box-shadow:inset 0 0 0 3px $w;
+      @include t(0.1s);
+    }
+    .icon{
+      width:30px;
+      height:30px;
+      position:absolute;
+      box-shadow:inset -5px 0 0 0 $w, inset 0 -5px 0 0 $w, inset 0 0 0 0 $w;
+      top:50%;
+      transform:translateY(-50%) rotate(45deg);
+      left:35px;
+      @include t(0.2s);
+      &:before{
+        content:'';
+        position:absolute;
+        width:40px;
+        height:5px;
+        background:$w;
+        left:-12.5px;
+        bottom:0px;
+        transform-origin:100% 50%;
+        transform:rotate(45deg);
+      }
+    }
+    input{
+      position:absolute;
+      width:100%;
+      height:100%;
+      opacity:0;
+      &:hover{
+        ~.icon{
+          transform:translateY(-50%) rotate(-45deg);
+        }
+      }
+      &:checked{
+        &~.inner{
+          background:radial-gradient(circle at center, $p, $w), $w;
+          background-position:150px 0px, 50%;
+          background-size:300%, 100%;
+          background-repeat:no-repeat;
+          width:calc(100% - 20px);
+        }
+        &~.icon{
+          border-radius:500%;
+          left:35px;
+          box-shadow:inset 0px 0 0 0 $w, inset 0 0px 0 0 $w, inset 0 0 0 2.5px $bg;
+          animation:spinning 2s linear infinite;
+          @keyframes spinning{
+            0%{
+              transform:translateY(-50%) rotate(0deg) scale(1.5);
+            }
+            100%{
+              transform:translateY(-50%) rotate(360deg) scale(1.5);
+            }
+          }
+        }
+        &~p{
+          color:transparent;
+          transform:translateX(-50%) translateY(200%);
+            span{
+              color:$bg;
+              opacity:1;
+              font-weight:900;
+              transform:translateY(-250%);
+              animation:downloading 0.5s ease-in-out forwards;
+              @keyframes downloading{
+                0%{
+                  transform:translateY(-500%);
+                  font-weight:900;
+                }
+                70%{
+                  transform:translateY(-240%);
+                  font-weight:900;
+                }
+                80%{
+                  transform:translateY(-255%);
+                  font-weight:900;
+                }
+                95%{
+                  transform:translateY(-250%);
+                  font-weight:900;
+                }
+              }
+            }
+        }
+      }
+    }
+    p{
+      position:absolute;
+      z-index:-1;
+      left:50%;
+      width:auto;
+      height:auto;
+      top:50%;
+      line-height:1;
+      transform:translateX(-50%) translateY(-50%);
+      margin-top:0;
+      margin-left:0px;
+      color:$w;
+      font-size:2em;
+      @include t(0.2s);
+      span{
+        opacity:1;
+        position:absolute;
+        left:0;
+        opacity:0;
+        transform:translateY(-500%);
+        @include t(0.3s);
+      }
+    }
+  }
+}
