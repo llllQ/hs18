@@ -21,9 +21,10 @@ header {
 }
 
 header a, header a:visited {
-  font-size:18px;
-  color:#F5F5F5;
+  font-size:50px;
+  color:rgb(0, 238, 255);
   text-decoration:none;
+  text-shadow: 1px 1px rgb(255, 0, 221);
 }
 
 header a:hover {
