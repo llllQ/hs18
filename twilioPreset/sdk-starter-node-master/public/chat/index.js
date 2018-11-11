@@ -1,4 +1,16 @@
 $(function() {
+
+  //get user location
+
+  var userLat = 0;
+  var userLong = 0;
+  navigator.geolocation.getCurrentPosition(function(position){
+    userLat = position.coords.latitude;
+    userLon = position.coords.longitude;
+    });
+    console.log('user lat at definition: '+userLat);
+
+
   // Get handle to the chat div
   var $chatWindow = $('#messages');
 
@@ -16,13 +28,10 @@ $(function() {
 
   var vpnChannel;
 
-  var myArray = [50.86, 5];
+  // var myArray = [50.86, 5];
 
-  var userLat = myArray[Math.floor(Math.random()* myArray.length)];
-  var userLong = 0;
+  // var userLat = myArray[Math.floor(Math.random()* myArray.length)];
 
-
-  console.log(process.env);
 
   // The server will assign the client a random username - store that value
   // here
@@ -76,7 +85,9 @@ $(function() {
   function createOrJoinGeneralChannel() {
     //new version coded by the boys
     print('Attempting to find hotboys in your area...')
-    if (userLat == 50.86){
+    console.log('user latitude: '+ userLat);
+    alert(userLat);
+    if (userLat >50.5 ){
       chatClient.getChannelByUniqueName('sussex')
       .then(function(channel){
         sussChannel = channel;
@@ -166,21 +177,21 @@ $(function() {
     });
 
     // Listen for new messages sent to the channel
-    generalChannel.on('messageAdded', function(message) {
+    sussChannel.on('messageAdded', function(message) {
       printMessage(message.author, message.body);
     });
   }
 
   function setupVpnChannel() {
     // Join the general channel
-    sussChannel.join().then(function(channel) {
+    vpnChannel.join().then(function(channel) {
       // print('Joined channel as '
       // + '<span class="me">' + username + '</span>.', true);
       print('Joined Local Chatroom');
     });
 
     // Listen for new messages sent to the channel
-    generalChannel.on('messageAdded', function(message) {
+    vpnChannel.on('messageAdded', function(message) {
       printMessage(message.author, message.body);
     });
   }
