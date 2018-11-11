@@ -265,7 +265,7 @@ console.log(userLat);
   var $input = $('#chat-input');
   $input.on('keydown', function(e) {
     if (e.keyCode == 13) {
-      vpnChannel.sendMessage($input.val())
+      sussChannel.sendMessage($input.val())
       $input.val('');
     }
   });
